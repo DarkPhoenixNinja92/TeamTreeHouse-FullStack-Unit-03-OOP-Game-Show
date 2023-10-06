@@ -1,7 +1,9 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
-
+const overlay = document.getElementById('overlay');
+const button = document.getElementById('btn__reset');
+const overlayTxt = document.getElementById('game-over-message');
 
 class Game {
     constructor() {
@@ -21,13 +23,39 @@ class Game {
         return phraseRand;
     };
     startGame() {
-        const overlay = document.getElementById('overlay');
-        const button = document.getElementById('btn__reset');
-        
+        overlayTxt.textContent= '';
+        button.textContent = 'Start Game';
+        overlay.style.alignItems = 'initial';
+        overlay.style.justifyContent = 'initial';
+        overlay.classList.remove('lose');
         button.addEventListener('click', () => {
             overlay.style.display = 'none';
         });
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+    }
+    handleInteraction() {
+        const qwerty = document.getElementById('qwerty');
+        qwerty.addEventListener('click', (clicked) => {
+            if(clicked.target.tagName === 'BUTTON') {
+                const targetVal = clicked.target;
+                targetVal.disabled = true;
+                targetVal.classList.add('chosen');
+            }
+        });
+    }
+    checkForWin() {
+
+    }
+    removeLife() {
+
+    }
+    gameOver() {
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlayTxt.textContent = 'Game Over';
+        overlay.classList.add('lose');
+        button.textContent = 'Play Again';
     }
 }

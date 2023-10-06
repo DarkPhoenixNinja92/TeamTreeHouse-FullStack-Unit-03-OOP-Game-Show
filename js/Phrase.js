@@ -22,5 +22,14 @@ class Phrase {
             }
             ul.appendChild(letter);
         }
-    };
+    }
+    checkLetter(clicked) {
+        if(clicked.target.classList.contains('key')) {
+            return clicked.target.value;
+        }
+    }
+    showMatchedLetter() {
+        const letterVal = this.checkLetter();
+        console.log(`Matched letter: ${letterVal}`);
+    }
 }
